@@ -1,4 +1,5 @@
-import React from "react";
+'use client'
+import {useState} from "react";
 import co_1 from "@/public/images/co_1.jpg";
 import pl_3 from "@/public/images/pl_3.jpg";
 import pl_5 from "@/public/images/pl_5.jpg";
@@ -73,7 +74,31 @@ const style3Data = [
   { label: "Classique", value: "classique" },
   { label: "Zen/Nature", value: "zen/nature" },
 ];
+
+
+
 const Step2: React.FC<Step2Props> = ({ selectedProject }) => {
+  const [selectedType, setSelectedType] = useState(""); // Pour "Type de Projet"
+  const [selectedPlace, setSelectedPlace] = useState(""); // Pour "Emplacement" dans le cas de "placard"
+  const [otherPlace, setOtherPlace] = useState(""); // Pour "Autres emplacement" si nécessaire
+  const [selectedDoorType, setSelectedDoorType] = useState(""); // Pour "Type de porte"
+  const [description, setDescription] = useState(""); // Pour "Description"
+  const [selectedColor, setSelectedColor] = useState([]); // Pour "Couleurs des matériaux", pourrait être un array si multiselect
+  const [otherColor, setOtherColor] = useState(""); // Pour "Autres couleurs"
+  const [dimension, setDimension] = useState(""); // Pour "Dimensions"
+  const [selectedStyle, setSelectedStyle] = useState(""); // Pour "Style"
+  const [specificNeeds, setSpecificNeeds] = useState(""); // Pour "Besoins spécifiques"
+  const [plannedUsage, setPlannedUsage] = useState(""); // Pour "Utilisation prévue" dans le cas d'"armoire"
+  const [installationType, setInstallationType] = useState(""); // Pour "Type d'installation" dans le cas de "dressing"
+  const [furnitureType, setFurnitureType] = useState(""); //
+  
+
+  
+  
+  console.log('step2:'+selectedType,selectedDoorType,selectedStyle,selectedPlace,otherPlace, specificNeeds ,description,plannedUsage,installationType,furnitureType,dimension);
+  
+
+
   const renderProjectContent = () => {
     switch (selectedProject) {
       case "cuisine":
@@ -92,15 +117,10 @@ const Step2: React.FC<Step2Props> = ({ selectedProject }) => {
               <h2 className="text-4xl lg:text-5xl font-bold text-blue-900 leading-tight">
                 Parlons de votre projet de cuisine
               </h2>
-
               <p className="text-gray-600 my-2">Type de Projet</p>
-              <Select style={{ width: "100%" }}>
-                {typeData.map((item) => (
-                  <div key={item.value}>
-                    <Space>
-                      <p className="text-gray-600 mx-4">{item.label}</p>
-                    </Space>
-                  </div>
+              <Select onChange={value => setSelectedType(value)} style={{ width: "100%" }}>
+                {typeData.map(item => (
+                  <Select.Option key={item.value} value={item.value}>{item.label}</Select.Option>
                 ))}
               </Select>
             </div>
@@ -120,67 +140,28 @@ const Step2: React.FC<Step2Props> = ({ selectedProject }) => {
             </div>
             <div className="w-[80%]">
               <p className="text-gray-600 my-2">Emplacement</p>
-              <Select style={{ width: "100%" }}>
-                {placeData.map((item) => (
-                  <div key={item.value}>
-                    <Space>
-                      <p className="text-gray-600 mx-4">{item.label}</p>
-                    </Space>
-                  </div>
+              <Select onChange={value => setSelectedPlace(value)} style={{ width: "100%" }}>
+                {placeData.map(item => (
+                  <Select.Option key={item.value} value={item.value}>{item.label}</Select.Option>
                 ))}
               </Select>
-              <p className="text-gray-600 my-2">Autres emplacement </p>
+              <p className="text-gray-600 my-2">Autres emplacement</p>
               <Input
-                placeholder="À preciser si autres"
-                className="my-2 rounded-[5px] border-[#d9d9d9]"
+                placeholder="À préciser si autres"
+                onChange={e => setOtherPlace(e.target.value)}
                 style={{ width: "100%" }}
               />
               <p className="text-gray-600 my-2">Type de porte</p>
-              <Select style={{ width: "100%" }}>
-                {doorData.map((item) => (
-                  <div key={item.value}>
-                    <Space>
-                      <p className="text-gray-600 mx-4">{item.label}</p>
-                    </Space>
-                  </div>
+              <Select onChange={value => setSelectedDoorType(value)} style={{ width: "100%" }}>
+                {doorData.map(item => (
+                  <Select.Option key={item.value} value={item.value}>{item.label}</Select.Option>
                 ))}
               </Select>
-              <p className="text-gray-600 my-2">Description </p>
+              <p className="text-gray-600 my-2">Description</p>
               <textarea
-                placeholder="Description du type de rangement souhaité "
-                className="my-2 rounded-[5px] border-[#d9d9d9]"
+                placeholder="Description du type de rangement souhaité"
+                onChange={e => setDescription(e.target.value)}
                 style={{ width: "100%", height: "10vh" }}
-              />
-              <p className="text-gray-600 my-2">Couleurs des matériaux</p>
-              <Select style={{ width: "100%" }}>
-                {colors.map((item) => (
-                  <div key={item.value.join("-")}>
-                    <Space>
-                      {item.value.map((color) => (
-                        <ConfigProvider
-                          theme={{
-                            components: {
-                              Badge: {
-                                dotSize: 10,
-                              },
-                            },
-                          }}
-                        >
-                          <Badge color={color}></Badge>
-                        </ConfigProvider>
-                      ))}
-                      <p className="text-gray-600 mx-4">
-                        {item.name.join(" ")}
-                      </p>
-                    </Space>
-                  </div>
-                ))}
-              </Select>
-              <p className="text-gray-600 my-2">Autres couleurs </p>
-              <Input
-                placeholder="Bleu petrole , jaune moutarde"
-                className="my-2 rounded-[5px] border-[#d9d9d9]"
-                style={{ width: "100%" }}
               />
             </div>
           </>
@@ -198,47 +179,34 @@ const Step2: React.FC<Step2Props> = ({ selectedProject }) => {
               </div>
             </div>
             <div className="w-[80%]">
-              <p className="text-gray-600 my-2">Utilisation prévue </p>
-              <Select style={{ width: "100%" }}>
-                {usageData.map((item) => (
-                  <div key={item.value}>
-                    <Space>
-                      <p className="text-gray-600 mx-4">{item.label}</p>
-                    </Space>
-                  </div>
+              <p className="text-gray-600 my-2">Utilisation prévue</p>
+              <Select onChange={value => setPlannedUsage(value)} style={{ width: "100%" }}>
+                {usageData.map(item => (
+                  <Select.Option key={item.value} value={item.value}>{item.label}</Select.Option>
                 ))}
               </Select>
-              <p className="text-gray-600 my-2">Dimensions </p>
+              <p className="text-gray-600 my-2">Dimensions</p>
               <Input
                 placeholder="Dimension de votre armoire"
-                className="my-2 rounded-[5px] border-[#d9d9d9]"
+                onChange={e => setDimension(e.target.value)}
                 style={{ width: "100%" }}
               />
-              <p className="text-gray-600 my-2">Style </p>
-              <Select style={{ width: "100%" }}>
-                {styleData.map((item) => (
-                  <div key={item.value}>
-                    <Space>
-                      <p className="text-gray-600 mx-4">{item.label}</p>
-                    </Space>
-                  </div>
+              <p className="text-gray-600 my-2">Style</p>
+              <Select onChange={value => setSelectedStyle(value)} style={{ width: "100%" }}>
+                {styleData.map(item => (
+                  <Select.Option key={item.value} value={item.value}>{item.label}</Select.Option>
                 ))}
               </Select>
               <p className="text-gray-600 my-2">Type de porte</p>
-              <Select style={{ width: "100%" }}>
-                {doorData1.map((item) => (
-                  <div key={item.value}>
-                    <Space>
-                      <p className="text-gray-600 mx-4">{item.label}</p>
-                    </Space>
-                  </div>
+              <Select onChange={value => setSelectedDoorType(value)} style={{ width: "100%" }}>
+                {doorData1.map(item => (
+                  <Select.Option key={item.value} value={item.value}>{item.label}</Select.Option>
                 ))}
               </Select>
-
               <p className="text-gray-600 my-2">Aménagements internes</p>
               <textarea
-                placeholder="Description détaillée des besoins spécifiques "
-                className="my-2 rounded-[5px] border-[#d9d9d9]"
+                placeholder="Description détaillée des besoins spécifiques"
+                onChange={e => setSpecificNeeds(e.target.value)}
                 style={{ width: "100%", height: "10vh" }}
               />
             </div>
@@ -251,74 +219,35 @@ const Step2: React.FC<Step2Props> = ({ selectedProject }) => {
               <div className="h-[60vh]">
                 <Image
                   src={pl_5}
-                  alt="armoire"
+                  alt="dressing"
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
               </div>
             </div>
             <div className="w-[80%]">
               <p className="text-gray-600 my-2">Type d'installation</p>
-              <Select style={{ width: "100%" }}>
-                {modeleData.map((item) => (
-                  <div key={item.value}>
-                    <Space>
-                      <p className="text-gray-600 mx-4">{item.label}</p>
-                    </Space>
-                  </div>
+              <Select onChange={value => setInstallationType(value)} style={{ width: "100%" }}>
+                {modeleData.map(item => (
+                  <Select.Option key={item.value} value={item.value}>{item.label}</Select.Option>
                 ))}
               </Select>
-              <p className="text-gray-600 my-2">Dimensions </p>
+              <p className="text-gray-600 my-2">Dimensions</p>
               <Input
-                placeholder="Dimension de votre armoire"
-                className="my-2 rounded-[5px] border-[#d9d9d9]"
+                placeholder="Dimension de votre dressing"
+                onChange={e => setDimension(e.target.value)}
                 style={{ width: "100%" }}
               />
-              <p className="text-gray-600 my-2">Style </p>
-              <Select style={{ width: "100%" }}>
-                {style2Data.map((item) => (
-                  <div key={item.value}>
-                    <Space>
-                      <p className="text-gray-600 mx-4">{item.label}</p>
-                    </Space>
-                  </div>
+              <p className="text-gray-600 my-2">Style</p>
+              <Select onChange={value => setSelectedStyle(value)} style={{ width: "100%" }}>
+                {style2Data.map(item => (
+                  <Select.Option key={item.value} value={item.value}>{item.label}</Select.Option>
                 ))}
               </Select>
               <p className="text-gray-600 my-2">Aménagements internes</p>
               <textarea
-                placeholder="nombre de tiroirs, type de rangements pour chaussures "
-                className="my-2 rounded-[5px] border-[#d9d9d9]"
+                placeholder="Description détaillée des besoins spécifiques"
+                onChange={e => setSpecificNeeds(e.target.value)}
                 style={{ width: "100%", height: "10vh" }}
-              />
-              <p className="text-gray-600 my-2">Couleurs des matériaux</p>
-              <Select style={{ width: "100%" }}>
-                {colors.map((item) => (
-                  <div key={item.value.join("-")}>
-                    <Space>
-                      {item.value.map((color) => (
-                        <ConfigProvider
-                          theme={{
-                            components: {
-                              Badge: {
-                                dotSize: 10,
-                              },
-                            },
-                          }}
-                        >
-                          <Badge color={color}></Badge>
-                        </ConfigProvider>
-                      ))}
-                      <p className="text-gray-600 mx-4">
-                        {item.name.join(" ")}
-                      </p>
-                    </Space>
-                  </div>
-                ))}
-              </Select>
-              <p className="text-gray-600 my-2">Autres couleurs </p>
-              <Input
-                placeholder="Bleu petrole , jaune moutarde"
-                className="my-2 rounded-[5px] border-[#d9d9d9]"
-                style={{ width: "100%" }}
               />
             </div>
           </>
@@ -330,74 +259,35 @@ const Step2: React.FC<Step2Props> = ({ selectedProject }) => {
               <div className="h-[60vh]">
                 <Image
                   src={mv_7}
-                  alt="meuble de cuisine"
+                  alt="douche"
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
               </div>
             </div>
             <div className="w-[80%]">
               <p className="text-gray-600 my-2">Type de meuble</p>
-              <Select style={{ width: "100%" }}>
-                {type2Data.map((item) => (
-                  <div key={item.value}>
-                    <Space>
-                      <p className="text-gray-600 mx-4">{item.label}</p>
-                    </Space>
-                  </div>
+              <Select onChange={value => setFurnitureType(value)} style={{ width: "100%" }}>
+                {type2Data.map(item => (
+                  <Select.Option key={item.value} value={item.value}>{item.label}</Select.Option>
                 ))}
               </Select>
               <p className="text-gray-600 my-2">Dimensions</p>
               <Input
                 placeholder="Dimensions"
-                className="my-2 rounded-[5px] border-[#d9d9d9]"
+                onChange={e => setDimension(e.target.value)}
                 style={{ width: "100%" }}
               />
               <p className="text-gray-600 my-2">Style</p>
-              <Select style={{ width: "100%" }}>
-                {style3Data.map((item) => (
-                  <div key={item.value}>
-                    <Space>
-                      <p className="text-gray-600 mx-4">{item.label}</p>
-                    </Space>
-                  </div>
+              <Select onChange={value => setSelectedStyle(value)} style={{ width: "100%" }}>
+                {style3Data.map(item => (
+                  <Select.Option key={item.value} value={item.value}>{item.label}</Select.Option>
                 ))}
               </Select>
               <p className="text-gray-600 my-2">Besoins spécifiques</p>
               <textarea
-                placeholder="Nombre de tiroirs, espaces ouverts"
-                className="my-2 rounded-[5px] border-[#d9d9d9]"
+                placeholder="Nombre de tiroirs, espaces ouverts, etc."
+                onChange={e => setSpecificNeeds(e.target.value)}
                 style={{ width: "100%", height: "10vh" }}
-              />
-              <p className="text-gray-600 my-2">Couleurs des matériaux</p>
-              <Select style={{ width: "100%" }}>
-                {colors.map((item) => (
-                  <div key={item.value.join("-")}>
-                    <Space>
-                      {item.value.map((color) => (
-                        <ConfigProvider
-                          theme={{
-                            components: {
-                              Badge: {
-                                dotSize: 10,
-                              },
-                            },
-                          }}
-                        >
-                          <Badge color={color}></Badge>
-                        </ConfigProvider>
-                      ))}
-                      <p className="text-gray-600 mx-4">
-                        {item.name.join(" ")}
-                      </p>
-                    </Space>
-                  </div>
-                ))}
-              </Select>
-              <p className="text-gray-600 my-2">Autres couleurs </p>
-              <Input
-                placeholder="Bleu petrole , jaune moutarde"
-                className="my-2 rounded-[5px] border-[#d9d9d9]"
-                style={{ width: "100%" }}
               />
             </div>
           </>
@@ -406,6 +296,7 @@ const Step2: React.FC<Step2Props> = ({ selectedProject }) => {
         return null;
     }
   };
+  
   return (
     <>
       <ConfigProvider

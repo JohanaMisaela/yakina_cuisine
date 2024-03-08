@@ -30,6 +30,7 @@ export default function WhatWeDo() {
                 src={placard}
                 alt="blue kitchen"
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                loading="lazy"
               />
             </div>
             <div className="relative h-[70vh] flex flex-col items-center p-6 bg-white rounded shadow-xl">
@@ -37,6 +38,7 @@ export default function WhatWeDo() {
                 src={dressing}
                 alt="blue kitchen"
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                loading="lazy"
               />
             </div>
             <div className="relative h-[70vh] flex flex-col items-center p-6 bg-white rounded shadow-xl">
@@ -44,6 +46,7 @@ export default function WhatWeDo() {
                 src={wardrobe}
                 alt="blue kitchen"
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                loading="lazy"
               />
             </div>
           </div>
