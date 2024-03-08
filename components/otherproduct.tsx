@@ -1,10 +1,10 @@
 import Image from "next/image";
-import pl_1 from "@/public/images/pl_1.jpg";
-import pl_2 from "@/public/images/pl_2.jpg";
-import pl_3 from "@/public/images/pl_3.jpg";
-import pl_4 from "@/public/images/pl_4.jpg";
-import pl_5 from "@/public/images/pl_5.jpg";
-import pl_6 from "@/public/images/pl_6.jpg";
+import pl_1 from "@/public/images/pl_1.webp";
+import pl_2 from "@/public/images/pl_2.webp";
+import pl_3 from "@/public/images/pl_3.webp";
+import pl_4 from "@/public/images/pl_4.webp";
+import pl_5 from "@/public/images/pl_5.webp";
+import pl_6 from "@/public/images/pl_6.webp";
 export default function OtherProduct() {
   return (
     <div className="relative">

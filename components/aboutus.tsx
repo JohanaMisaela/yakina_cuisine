@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import blueKitchen from "@/public/images/ci_6.jpg";
+import blueKitchen from "@/public/images/ci_6.webp";
 export default function AboutUs() {
   return (
     <section className="relative">

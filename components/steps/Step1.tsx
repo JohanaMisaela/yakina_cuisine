@@ -6,13 +6,13 @@ import { LuHammer } from "react-icons/lu";
 import { MdOutlineCurtainsClosed, MdOutlineFiberNew, MdOutlineFactory } from "react-icons/md";
 import { TbBath, TbAirConditioningDisabled } from "react-icons/tb";
 import Image from "next/image";
-import color1 from '@/public/images/color1.png'
-import color2 from '@/public/images/color2.png'
+import color1 from '@/public/images/color1.webp'
+import color2 from '@/public/images/color2.webp'
 interface Step1Props {
   onSelectedProjectChange: (value: string) => void;
 }
 
-const Step1: React.FC<Step1Props> = ({ onSelectedProjectChange }) => {
+const Step1: React.FC<Step1Props> = ({ onSelectedProjectChange , }) => {
   const [selectedProject, setSelectedProject] = useState<string>("");
   const [selectedType, setSelectedType] = useState<string>("");
   const [selectedColors, setSelectedColors] = useState<string[]>([]);

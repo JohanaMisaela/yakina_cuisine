@@ -1,9 +1,9 @@
 'use client'
 import {useState} from "react";
-import co_1 from "@/public/images/co_1.jpg";
-import pl_3 from "@/public/images/pl_3.jpg";
-import pl_5 from "@/public/images/pl_5.jpg";
-import mv_7 from "@/public/images/mv_7.jpg";
+import co_1 from "@/public/images/co_1.webp";
+import pl_3 from "@/public/images/pl_3.webp";
+import pl_5 from "@/public/images/pl_5.webp";
+import mv_7 from "@/public/images/mv_7.webp";
 import Image from "next/image";
 import { Badge, ConfigProvider, Input, Select, Space } from "antd";
 

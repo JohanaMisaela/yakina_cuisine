@@ -1,7 +1,7 @@
 import Image from "next/image";
-import blueKitchen from "@/public/images/ci_6.jpg";
-import grayKitchen from "@/public/images/co_2.jpg";
-import whiteKitchen from "@/public/images/ci_1.jpg";
+import blueKitchen from "@/public/images/ci_6.webp";
+import grayKitchen from "@/public/images/co_2.webp";
+import whiteKitchen from "@/public/images/ci_1.webp";
 export default function Features() {
   return (
     <section className="relative">

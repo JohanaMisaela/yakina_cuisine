@@ -1,7 +1,7 @@
 import Image from "next/image";
-import placard from "@/public/images/pl_1.jpg";
-import dressing from "@/public/images/pl_3.jpg";
-import wardrobe from "@/public/images/pl_4.jpg";
+import placard from "@/public/images/pl_1.webp";
+import dressing from "@/public/images/pl_3.webp";
+import wardrobe from "@/public/images/pl_4.webp";
 export default function WhatWeDo() {
   return (
     <section className="relative">

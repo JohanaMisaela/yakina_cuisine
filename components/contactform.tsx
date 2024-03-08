@@ -8,8 +8,13 @@ import Step4 from "./steps/Step4";
 const steps = ["Step 1", "Step 2", "Step 3", "Step 4"];
 
 export default function ContactForm() {
+  
   const [currentStep, setCurrentStep] = useState(0);
   const [selectedProject, setSelectedProject] = useState<string>("");
+
+
+
+   
 
   const handleSelectedProjectChange = (value: string) => {
     setSelectedProject(value);
@@ -26,9 +31,13 @@ export default function ContactForm() {
   return (
     <div className="max-w-screen-xl mt-24 px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-gray-100 text-gray-900 rounded-lg shadow-lg">
       {currentStep === 0 && (
-        <Step1 onSelectedProjectChange={handleSelectedProjectChange} />
+        <Step1 
+       
+        onSelectedProjectChange={handleSelectedProjectChange} />
       )}
-      {currentStep === 1 && <Step2 selectedProject={selectedProject} />}
+      {currentStep === 1 && <Step2 selectedProject={selectedProject}
+      
+      />}
       {currentStep === 2 && <Step3 />}
       {currentStep === 3 && <Step4 />}
       <div className="flex max-w-screen-xl items-center justify-end">
