@@ -5,6 +5,8 @@ import Step2 from "./steps/Step2";
 import Step3 from "./steps/Step3";
 import Step4 from "./steps/Step4";
 import { useFormData } from "@/context/FormDataProvider";
+import { toast } from "react-toastify";
+import emailjs from "emailjs-com";
 
 const steps = ["Step 1", "Step 2", "Step 3", "Step 4"];
 
@@ -58,6 +60,35 @@ export default function ContactForm() {
     setCurrentStep((prevStep) => prevStep - 1);
   };
 
+  const Message: string = `
+    Je suis ${name} ${firstName} venant de ${address} voici mon contact ${phone} il est preferable de m'appeler ${bestContactTime} .
+    J'aimerais prendre un rendez-vous pour le ${dateObject} afin qu'on en discute .
+    J'ai un projet de ${selectedProject1} de type ${selectedType} de couleur ${selectedColors} ${otherColors} (${specialEquipment}). 
+    Cordialement .
+  `;
+
+  const sendEmail = (e: any) => {
+    e.preventDefault();
+
+    emailjs
+      .send(
+        "service_ozzx9ui",
+        "template_sshynzk",
+        { message: Message },
+        "w-44YdWir9gv4NeJ3"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          alert("Votre message a été bien envoyé");
+        },
+        (error) => {
+          console.log(error.text);
+          // Handle errors here (e.g., showing an error message)
+        }
+      );
+  };
+
   return (
     <div className="max-w-screen-xl mt-24 px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-gray-100 text-gray-900 rounded-lg shadow-lg">
       {currentStep === 0 && (
@@ -84,7 +115,10 @@ export default function ContactForm() {
           </button>
         )}
         {currentStep === steps.length - 1 && (
-          <button className=" py-2 w-[25%] mx-2 text-center bg-transparent border border-solid border-blue-900 text-blue-900 rounded-[20px] hover:bg-blue-900 hover:text-white">
+          <button
+            onClick={sendEmail}
+            className=" py-2 w-[25%] mx-2 text-center bg-transparent border border-solid border-blue-900 text-blue-900 rounded-[20px] hover:bg-blue-900 hover:text-white"
+          >
             Envoyer
           </button>
         )}
