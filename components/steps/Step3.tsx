@@ -1,13 +1,17 @@
+"use client";
+import { useFormData } from "@/context/FormDataProvider";
 import { Input, Radio, Space } from "antd";
 import React, { useState } from "react";
 
 export default function Step3() {
-  const [specificNeeds, setSpecificNeeds] = useState("");
-  const [budget, setBudget] = useState(null); // Pour gérer la sélection du budget
-  const [discoveryChannel, setDiscoveryChannel] = useState(null); // Pour gérer comment l'utilisateur a entendu parler de vous
-  const [otherChannel, setOtherChannel] = useState(""); // Pour gérer la saisie du champ 'Autres'
-  const [additionalRemarks, setAdditionalRemarks] = useState(""); // Pour gérer les remarques ou spécifications supplémentaires
+  const { formData, updateFormData } = useFormData();
 
+  const handleInputChange = (
+    field: keyof typeof formData,
+    value: string
+  ): void => {
+    updateFormData({ [field]: value });
+  };
   return (
     <>
       <div className="flex flex-col justify-between">
@@ -17,20 +21,29 @@ export default function Step3() {
           </p>
           <textarea
             placeholder="Rangements, accessibilité, etc."
-            value={specificNeeds}
-            onChange={(e) => setSpecificNeeds(e.target.value)}
+            onChange={(event) => {
+              const value = event.target.value;
+              handleInputChange("specificNeeds1", value);
+            }}
+            value={formData.specificNeeds1}
             className="my-2 rounded-[5px] border-[#d9d9d9]"
             style={{ width: "100%", height: "10vh" }}
           />
           <p className="text-gray-600 my-2">
             Quel est votre budget approximatif ?
           </p>
-          <Radio.Group onChange={(e) => setBudget(e.target.value)} value={budget}>
+          <Radio.Group
+            onChange={(event) => {
+              const value = event.target.value;
+              handleInputChange("budget", value);
+            }}
+            value={formData.budget}
+          >
             <Space direction="vertical">
-              <Radio value={1}>Moins de 10k€ </Radio>
-              <Radio value={2}>Entre 10k€ et 30k€ </Radio>
-              <Radio value={3}>Entre 30k€ et 60k€ </Radio>
-              <Radio value={4}>Supérieur à 60k€ </Radio>
+              <Radio value={"Moins de 10k€"}>Moins de 10k€ </Radio>
+              <Radio value={"Entre 10k€ et 30k€ "}>Entre 10k€ et 30k€ </Radio>
+              <Radio value={"Entre 30k€ et 60k€"}>Entre 30k€ et 60k€ </Radio>
+              <Radio value={"Supérieur à 60k€"}>Supérieur à 60k€ </Radio>
             </Space>
           </Radio.Group>
         </div>
@@ -39,26 +52,39 @@ export default function Step3() {
         <p className="text-gray-600 my-2">
           Comment avez-vous entendu parler de nous ?
         </p>
-        <Radio.Group onChange={(e) => setDiscoveryChannel(e.target.value)} value={discoveryChannel}>
+        <Radio.Group
+          onChange={(event) => {
+            const value = event.target.value;
+            handleInputChange("discoveryChannel", value);
+          }}
+          value={formData.discoveryChannel}
+        >
           <Space direction="vertical">
-            <Radio value={1}>Réseaux sociaux </Radio>
-            <Radio value={2}>Bouche à oreille</Radio>
-            <Radio value={3}>Publicité</Radio>
+            <Radio value={"Réseaux sociaux"}>Réseaux sociaux </Radio>
+            <Radio value={"Bouche à oreille"}>Bouche à oreille</Radio>
+            <Radio value={"Publicité"}>Publicité</Radio>
           </Space>
         </Radio.Group>
         <p className="text-gray-600 my-2">Autres</p>
         <Input
-          value={otherChannel}
-          onChange={(e) => setOtherChannel(e.target.value)}
+          onChange={(event) => {
+            const value = event.target.value;
+            handleInputChange("otherChannel", value);
+          }}
+          value={formData.otherChannel}
           className="my-2 rounded-[5px] border-[#d9d9d9]"
           style={{ width: "100%" }}
         />
         <p className="text-gray-600 my-2">
-          Des remarques ou spécifications supplémentaires concernant votre projet ?
+          Des remarques ou spécifications supplémentaires concernant votre
+          projet ?
         </p>
         <Input
-          value={additionalRemarks}
-          onChange={(e) => setAdditionalRemarks(e.target.value)}
+          onChange={(event) => {
+            const value = event.target.value;
+            handleInputChange("additionalRemarks", value);
+          }}
+          value={formData.additionalRemarks}
           className="my-2 rounded-[5px] border-[#d9d9d9]"
           style={{ width: "100%" }}
         />

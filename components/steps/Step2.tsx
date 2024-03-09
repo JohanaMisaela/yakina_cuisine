@@ -1,11 +1,12 @@
-'use client'
-import {useState} from "react";
+"use client";
+import { useState } from "react";
 import co_1 from "@/public/images/co_1.webp";
 import pl_3 from "@/public/images/pl_3.webp";
 import pl_5 from "@/public/images/pl_5.webp";
 import mv_7 from "@/public/images/mv_7.webp";
 import Image from "next/image";
 import { Badge, ConfigProvider, Input, Select, Space } from "antd";
+import { useFormData } from "@/context/FormDataProvider";
 
 interface Step2Props {
   selectedProject: string;
@@ -75,30 +76,15 @@ const style3Data = [
   { label: "Zen/Nature", value: "zen/nature" },
 ];
 
-
-
 const Step2: React.FC<Step2Props> = ({ selectedProject }) => {
-  const [selectedType, setSelectedType] = useState(""); // Pour "Type de Projet"
-  const [selectedPlace, setSelectedPlace] = useState(""); // Pour "Emplacement" dans le cas de "placard"
-  const [otherPlace, setOtherPlace] = useState(""); // Pour "Autres emplacement" si nécessaire
-  const [selectedDoorType, setSelectedDoorType] = useState(""); // Pour "Type de porte"
-  const [description, setDescription] = useState(""); // Pour "Description"
-  const [selectedColor, setSelectedColor] = useState([]); // Pour "Couleurs des matériaux", pourrait être un array si multiselect
-  const [otherColor, setOtherColor] = useState(""); // Pour "Autres couleurs"
-  const [dimension, setDimension] = useState(""); // Pour "Dimensions"
-  const [selectedStyle, setSelectedStyle] = useState(""); // Pour "Style"
-  const [specificNeeds, setSpecificNeeds] = useState(""); // Pour "Besoins spécifiques"
-  const [plannedUsage, setPlannedUsage] = useState(""); // Pour "Utilisation prévue" dans le cas d'"armoire"
-  const [installationType, setInstallationType] = useState(""); // Pour "Type d'installation" dans le cas de "dressing"
-  const [furnitureType, setFurnitureType] = useState(""); //
-  
+  const { formData, updateFormData } = useFormData();
 
-  
-  
-  console.log('step2:'+selectedType,selectedDoorType,selectedStyle,selectedPlace,otherPlace, specificNeeds ,description,plannedUsage,installationType,furnitureType,dimension);
-  
-
-
+  const handleInputChange = (
+    field: keyof typeof formData,
+    value: string
+  ): void => {
+    updateFormData({ [field]: value });
+  };
   const renderProjectContent = () => {
     switch (selectedProject) {
       case "cuisine":
@@ -118,9 +104,17 @@ const Step2: React.FC<Step2Props> = ({ selectedProject }) => {
                 Parlons de votre projet de cuisine
               </h2>
               <p className="text-gray-600 my-2">Type de Projet</p>
-              <Select onChange={value => setSelectedType(value)} style={{ width: "100%" }}>
-                {typeData.map(item => (
-                  <Select.Option key={item.value} value={item.value}>{item.label}</Select.Option>
+              <Select
+                onChange={(value) => {
+                  handleInputChange("selectedType1", value);
+                }}
+                value={formData.selectedType1}
+                style={{ width: "100%" }}
+              >
+                {typeData.map((item) => (
+                  <Select.Option key={item.value} value={item.value}>
+                    {item.label}
+                  </Select.Option>
                 ))}
               </Select>
             </div>
@@ -140,27 +134,51 @@ const Step2: React.FC<Step2Props> = ({ selectedProject }) => {
             </div>
             <div className="w-[80%]">
               <p className="text-gray-600 my-2">Emplacement</p>
-              <Select onChange={value => setSelectedPlace(value)} style={{ width: "100%" }}>
-                {placeData.map(item => (
-                  <Select.Option key={item.value} value={item.value}>{item.label}</Select.Option>
+              <Select
+                onChange={(value) => {
+                  handleInputChange("selectedPlace", value);
+                }}
+                value={formData.selectedPlace}
+                style={{ width: "100%" }}
+              >
+                {placeData.map((item) => (
+                  <Select.Option key={item.value} value={item.value}>
+                    {item.label}
+                  </Select.Option>
                 ))}
               </Select>
               <p className="text-gray-600 my-2">Autres emplacement</p>
               <Input
                 placeholder="À préciser si autres"
-                onChange={e => setOtherPlace(e.target.value)}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  handleInputChange("otherPlace", value);
+                }}
+                value={formData.otherPlace}
                 style={{ width: "100%" }}
               />
               <p className="text-gray-600 my-2">Type de porte</p>
-              <Select onChange={value => setSelectedDoorType(value)} style={{ width: "100%" }}>
-                {doorData.map(item => (
-                  <Select.Option key={item.value} value={item.value}>{item.label}</Select.Option>
+              <Select
+                onChange={(value) => {
+                  handleInputChange("selectedDoorType", value);
+                }}
+                value={formData.selectedDoorType}
+                style={{ width: "100%" }}
+              >
+                {doorData.map((item) => (
+                  <Select.Option key={item.value} value={item.value}>
+                    {item.label}
+                  </Select.Option>
                 ))}
               </Select>
               <p className="text-gray-600 my-2">Description</p>
               <textarea
                 placeholder="Description du type de rangement souhaité"
-                onChange={e => setDescription(e.target.value)}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  handleInputChange("description", value);
+                }}
+                value={formData.description}
                 style={{ width: "100%", height: "10vh" }}
               />
             </div>
@@ -180,33 +198,65 @@ const Step2: React.FC<Step2Props> = ({ selectedProject }) => {
             </div>
             <div className="w-[80%]">
               <p className="text-gray-600 my-2">Utilisation prévue</p>
-              <Select onChange={value => setPlannedUsage(value)} style={{ width: "100%" }}>
-                {usageData.map(item => (
-                  <Select.Option key={item.value} value={item.value}>{item.label}</Select.Option>
+              <Select
+                onChange={(value) => {
+                  handleInputChange("plannedUsage", value);
+                }}
+                value={formData.plannedUsage}
+                style={{ width: "100%" }}
+              >
+                {usageData.map((item) => (
+                  <Select.Option key={item.value} value={item.value}>
+                    {item.label}
+                  </Select.Option>
                 ))}
               </Select>
               <p className="text-gray-600 my-2">Dimensions</p>
               <Input
                 placeholder="Dimension de votre armoire"
-                onChange={e => setDimension(e.target.value)}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  handleInputChange("dimension", value);
+                }}
+                value={formData.dimension}
                 style={{ width: "100%" }}
               />
               <p className="text-gray-600 my-2">Style</p>
-              <Select onChange={value => setSelectedStyle(value)} style={{ width: "100%" }}>
-                {styleData.map(item => (
-                  <Select.Option key={item.value} value={item.value}>{item.label}</Select.Option>
+              <Select
+                onChange={(value) => {
+                  handleInputChange("selectedStyle", value);
+                }}
+                value={formData.selectedStyle}
+                style={{ width: "100%" }}
+              >
+                {styleData.map((item) => (
+                  <Select.Option key={item.value} value={item.value}>
+                    {item.label}
+                  </Select.Option>
                 ))}
               </Select>
               <p className="text-gray-600 my-2">Type de porte</p>
-              <Select onChange={value => setSelectedDoorType(value)} style={{ width: "100%" }}>
-                {doorData1.map(item => (
-                  <Select.Option key={item.value} value={item.value}>{item.label}</Select.Option>
+              <Select
+                onChange={(value) => {
+                  handleInputChange("selectedDoorType", value);
+                }}
+                value={formData.selectedDoorType}
+                style={{ width: "100%" }}
+              >
+                {doorData1.map((item) => (
+                  <Select.Option key={item.value} value={item.value}>
+                    {item.label}
+                  </Select.Option>
                 ))}
               </Select>
               <p className="text-gray-600 my-2">Aménagements internes</p>
               <textarea
                 placeholder="Description détaillée des besoins spécifiques"
-                onChange={e => setSpecificNeeds(e.target.value)}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  handleInputChange("specificNeeds", value);
+                }}
+                value={formData.specificNeeds}
                 style={{ width: "100%", height: "10vh" }}
               />
             </div>
@@ -226,27 +276,51 @@ const Step2: React.FC<Step2Props> = ({ selectedProject }) => {
             </div>
             <div className="w-[80%]">
               <p className="text-gray-600 my-2">Type d'installation</p>
-              <Select onChange={value => setInstallationType(value)} style={{ width: "100%" }}>
-                {modeleData.map(item => (
-                  <Select.Option key={item.value} value={item.value}>{item.label}</Select.Option>
+              <Select
+                onChange={(value) => {
+                  handleInputChange("installationType", value);
+                }}
+                value={formData.installationType}
+                style={{ width: "100%" }}
+              >
+                {modeleData.map((item) => (
+                  <Select.Option key={item.value} value={item.value}>
+                    {item.label}
+                  </Select.Option>
                 ))}
               </Select>
               <p className="text-gray-600 my-2">Dimensions</p>
               <Input
                 placeholder="Dimension de votre dressing"
-                onChange={e => setDimension(e.target.value)}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  handleInputChange("dimension", value);
+                }}
+                value={formData.dimension}
                 style={{ width: "100%" }}
               />
               <p className="text-gray-600 my-2">Style</p>
-              <Select onChange={value => setSelectedStyle(value)} style={{ width: "100%" }}>
-                {style2Data.map(item => (
-                  <Select.Option key={item.value} value={item.value}>{item.label}</Select.Option>
+              <Select
+                onChange={(value) => {
+                  handleInputChange("selectedStyle", value);
+                }}
+                value={formData.selectedStyle}
+                style={{ width: "100%" }}
+              >
+                {style2Data.map((item) => (
+                  <Select.Option key={item.value} value={item.value}>
+                    {item.label}
+                  </Select.Option>
                 ))}
               </Select>
               <p className="text-gray-600 my-2">Aménagements internes</p>
               <textarea
                 placeholder="Description détaillée des besoins spécifiques"
-                onChange={e => setSpecificNeeds(e.target.value)}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  handleInputChange("specificNeeds", value);
+                }}
+                value={formData.specificNeeds}
                 style={{ width: "100%", height: "10vh" }}
               />
             </div>
@@ -266,27 +340,51 @@ const Step2: React.FC<Step2Props> = ({ selectedProject }) => {
             </div>
             <div className="w-[80%]">
               <p className="text-gray-600 my-2">Type de meuble</p>
-              <Select onChange={value => setFurnitureType(value)} style={{ width: "100%" }}>
-                {type2Data.map(item => (
-                  <Select.Option key={item.value} value={item.value}>{item.label}</Select.Option>
+              <Select
+                onChange={(value) => {
+                  handleInputChange("furnitureType", value);
+                }}
+                value={formData.furnitureType}
+                style={{ width: "100%" }}
+              >
+                {type2Data.map((item) => (
+                  <Select.Option key={item.value} value={item.value}>
+                    {item.label}
+                  </Select.Option>
                 ))}
               </Select>
               <p className="text-gray-600 my-2">Dimensions</p>
               <Input
                 placeholder="Dimensions"
-                onChange={e => setDimension(e.target.value)}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  handleInputChange("dimension", value);
+                }}
+                value={formData.dimension}
                 style={{ width: "100%" }}
               />
               <p className="text-gray-600 my-2">Style</p>
-              <Select onChange={value => setSelectedStyle(value)} style={{ width: "100%" }}>
-                {style3Data.map(item => (
-                  <Select.Option key={item.value} value={item.value}>{item.label}</Select.Option>
+              <Select
+                onChange={(value) => {
+                  handleInputChange("selectedStyle", value);
+                }}
+                value={formData.selectedStyle}
+                style={{ width: "100%" }}
+              >
+                {style3Data.map((item) => (
+                  <Select.Option key={item.value} value={item.value}>
+                    {item.label}
+                  </Select.Option>
                 ))}
               </Select>
               <p className="text-gray-600 my-2">Besoins spécifiques</p>
               <textarea
                 placeholder="Nombre de tiroirs, espaces ouverts, etc."
-                onChange={e => setSpecificNeeds(e.target.value)}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  handleInputChange("specificNeeds", value);
+                }}
+                value={formData.specificNeeds}
                 style={{ width: "100%", height: "10vh" }}
               />
             </div>
@@ -296,7 +394,7 @@ const Step2: React.FC<Step2Props> = ({ selectedProject }) => {
         return null;
     }
   };
-  
+
   return (
     <>
       <ConfigProvider
