@@ -37,32 +37,14 @@ export default function ContactForm() {
     discoveryChannel,
     otherChannel,
     additionalRemarks,
+    name,
+    firstName,
+    address,
+    email,
+    phone,
+    bestContactTime,
+    dateObject,
   } = formData;
-  console.log(
-    selectedProject1,
-    selectedType,
-    selectedColors,
-    otherColors,
-    specialEquipment,
-    selectedType1,
-    selectedPlace,
-    otherPlace,
-    selectedDoorType,
-    description,
-    selectedColor,
-    otherColor1,
-    dimension,
-    selectedStyle,
-    specificNeeds,
-    plannedUsage,
-    installationType,
-    furnitureType,
-    specificNeeds1,
-    budget,
-    discoveryChannel,
-    otherChannel,
-    additionalRemarks
-  );
 
   const handleSelectedProjectChange = (value: string) => {
     setSelectedProject(value);
