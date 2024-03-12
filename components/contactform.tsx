@@ -61,10 +61,28 @@ export default function ContactForm() {
   };
 
   const Message: string = `
-    Je suis ${name} ${firstName} venant de ${address} voici mon contact ${phone} il est preferable de m'appeler ${bestContactTime} .
-    J'aimerais prendre un rendez-vous pour le ${dateObject} afin qu'on en discute .
-    J'ai un projet de ${selectedProject1} de type ${selectedType} de couleur ${selectedColors} ${otherColors} (${specialEquipment}). 
-    Cordialement .
+    Message venant de  ${name} ${firstName} 
+    contact : ${phone} ${address}  ${email} 
+    Meilleur moment pour etre contacté : ${bestContactTime} 
+    Date et heure de rendez-vous : ${dateObject}
+
+    LE PROJET :
+    - espace souhaitez à aménager:    ${selectedProject1}  ${selectedType1}
+    - de style : ${selectedType} ${selectedStyle} ${furnitureType}
+    - couleur choisi : ${selectedColors} ${otherColors} 
+    - informations supplementaire : ${specialEquipment}
+
+    -utilisation prevue : ${plannedUsage}
+    -emplacement : ${selectedPlace} ${otherPlace}
+    -type de porte :${selectedDoorType} ${installationType}
+    -description :${description} ${specificNeeds}
+    -dimensions : ${dimension}
+
+    -besoin specidfiques : ${specificNeeds1}
+    -budget approximatif : ${budget}
+    - Comment avez-vous entendu parler de nous ?
+    ${discoveryChannel} ${otherChannel}
+    -remarques ou specifications sur le projet : ${additionalRemarks}
   `;
 
   const sendEmail = (e: any) => {
@@ -84,7 +102,6 @@ export default function ContactForm() {
         },
         (error) => {
           console.log(error.text);
-          // Handle errors here (e.g., showing an error message)
         }
       );
   };
