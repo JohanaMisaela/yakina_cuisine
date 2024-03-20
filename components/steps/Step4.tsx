@@ -15,10 +15,10 @@ export default function Step4() {
   const [appointmentDateTime, setAppointmentDateTime] = useState();
   const handledatetime = (value: any) => {
     setAppointmentDateTime(value);
-    const dateObject = appointmentDateTime
-      ? (appointmentDateTime as any).$d
-      : null;
-    handleInputChange("dateObject", dateObject);
+    const dateObject = appointmentDateTime;
+    console.log(dateObject);
+
+    // handleInputChange("dateObject", appointmentDateTime);
   };
 
   return (
@@ -37,6 +37,7 @@ export default function Step4() {
             value={formData.name}
             className="my-2 rounded-[5px] border-[#d9d9d9]"
             style={{ width: "100%" }}
+            required
           />
           <p className="text-gray-600 my-2">Prénom</p>
           <Input
@@ -47,6 +48,7 @@ export default function Step4() {
             value={formData.firstName}
             className="my-2 rounded-[5px] border-[#d9d9d9]"
             style={{ width: "100%" }}
+            required
           />
           <p className="text-gray-600 my-2">Adresse complète</p>
           <Input
@@ -57,6 +59,7 @@ export default function Step4() {
             value={formData.address}
             className="my-2 rounded-[5px] border-[#d9d9d9]"
             style={{ width: "100%" }}
+            required
           />
         </div>
       </div>
@@ -70,6 +73,7 @@ export default function Step4() {
           value={formData.email}
           className="my-2 rounded-[5px] border-[#d9d9d9]"
           style={{ width: "100%" }}
+          required
         />
         <p className="text-gray-600 my-2">Numéro de téléphone</p>
         <Input
@@ -80,6 +84,7 @@ export default function Step4() {
           value={formData.phone}
           className="my-2 rounded-[5px] border-[#d9d9d9]"
           style={{ width: "100%" }}
+          required
         />
         <p className="text-gray-600 mt-2">Meilleur moment pour être contacté</p>
         <p className="text-gray-600 text-xs italic mb-2">
@@ -94,8 +99,12 @@ export default function Step4() {
           value={formData.bestContactTime}
           className="my-2 rounded-[5px] border-[#d9d9d9]"
           style={{ width: "100%" }}
+          required
         />
-        <p className="text-gray-600 my-2">Date et heure du rendez-vous</p>
+        <p className="text-gray-600 my-2">
+          Nous vous proposons de caler un rendez vous avec vous en fonction de
+          vos disponibilités
+        </p>
         <DatePicker
           value={appointmentDateTime}
           onChange={(value) => handledatetime(value)}
@@ -103,6 +112,7 @@ export default function Step4() {
           format="YYYY-MM-DD HH:mm"
           className="my-2 rounded-[5px] border-[#d9d9d9]"
           style={{ width: "100%" }}
+          required
         />
       </div>
     </>

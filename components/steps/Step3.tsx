@@ -26,7 +26,7 @@ export default function Step3() {
               handleInputChange("specificNeeds1", value);
             }}
             value={formData.specificNeeds1}
-            className="my-2 rounded-[5px] border-[#d9d9d9]"
+            className="my-2 rounded-[5px] border-[#d9d9d9] text-gray-600"
             style={{ width: "100%", height: "10vh" }}
           />
           <p className="text-gray-600 my-2">
@@ -66,28 +66,30 @@ export default function Step3() {
           </Space>
         </Radio.Group>
         <p className="text-gray-600 my-2">Autres</p>
-        <Input
+        <textarea
           onChange={(event) => {
             const value = event.target.value;
             handleInputChange("otherChannel", value);
           }}
           value={formData.otherChannel}
-          className="my-2 rounded-[5px] border-[#d9d9d9]"
-          style={{ width: "100%" }}
-        />
+          className="my-2 rounded-[5px] border-[#d9d9d9] text-gray-600"
+          style={{ width: "100%", height: "10vh" }}
+          required
+        ></textarea>
         <p className="text-gray-600 my-2">
           Des remarques ou spécifications supplémentaires concernant votre
           projet ?
         </p>
-        <Input
+        <textarea
           onChange={(event) => {
             const value = event.target.value;
             handleInputChange("additionalRemarks", value);
           }}
+          required
           value={formData.additionalRemarks}
-          className="my-2 rounded-[5px] border-[#d9d9d9]"
-          style={{ width: "100%" }}
-        />
+          className="my-2 rounded-[5px] border-[#d9d9d9] text-gray-600"
+          style={{ width: "100%", height: "10vh" }}
+        ></textarea>
       </div>
     </>
   );

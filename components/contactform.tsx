@@ -47,6 +47,7 @@ export default function ContactForm() {
     bestContactTime,
     dateObject,
   } = formData;
+  console.log(dateObject);
 
   const handleSelectedProjectChange = (value: string) => {
     setSelectedProject(value);
@@ -86,24 +87,42 @@ export default function ContactForm() {
   `;
 
   const sendEmail = (e: any) => {
-    e.preventDefault();
+    if (
+      !name ||
+      !firstName ||
+      !address ||
+      !email ||
+      !phone ||
+      !bestContactTime ||
+      !selectedProject1 ||
+      !selectedType ||
+      !selectedColors ||
+      !specificNeeds1 ||
+      !budget ||
+      !additionalRemarks
+    ) {
+      alert("Veuillez remplir tout les champs");
+      window.history.pushState({}, "", "/contact");
+    } else {
+      e.preventDefault();
 
-    emailjs
-      .send(
-        "service_ozzx9ui",
-        "template_sshynzk",
-        { message: Message },
-        "w-44YdWir9gv4NeJ3"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-          alert("Votre message a été bien envoyé");
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
+      emailjs
+        .send(
+          "service_ozzx9ui",
+          "template_sshynzk",
+          { message: Message },
+          "w-44YdWir9gv4NeJ3"
+        )
+        .then(
+          (result) => {
+            console.log(result.text);
+            alert("Votre message a été bien envoyé");
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
+    }
   };
 
   return (

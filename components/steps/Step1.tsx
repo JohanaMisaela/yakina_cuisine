@@ -157,6 +157,7 @@ const Step1: React.FC<Step1Props> = ({ onSelectedProjectChange }) => {
               handleInputChange("specialEquipment", value);
             }}
             value={formData.specialEquipment}
+            required
           />
         </div>
       </ConfigProvider>

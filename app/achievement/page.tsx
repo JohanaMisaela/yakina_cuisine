@@ -30,8 +30,10 @@ export default function Achievements() {
           </div>
         </div>
       </div>
-      <OurKitchen />
-      <div id="placard" className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div id="cuisine">
+        <OurKitchen />
+      </div>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className=" ">
           <div className="text-center ">
             <div className="max-w-3xl mx-auto">
@@ -46,8 +48,10 @@ export default function Achievements() {
           </div>
         </div>
       </div>
-      <OtherProduct />
-      <div id="vasque" className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div id="placard">
+        <OtherProduct />
+      </div>
+      <div id="" className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className=" ">
           <div className="text-center ">
             <div className="max-w-3xl mx-auto">
@@ -61,7 +65,9 @@ export default function Achievements() {
           </div>
         </div>
       </div>
-      <BathRoomProduct />
+      <div id="vasque">
+        <BathRoomProduct />
+      </div>
     </>
   );
 }

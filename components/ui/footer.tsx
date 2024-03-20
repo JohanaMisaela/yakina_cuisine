@@ -18,7 +18,7 @@ export default function Footer() {
             <ul className="text-sm">
               <li className="mb-2">
                 <a
-                  href="achievement"
+                  href="achievement#cuisine"
                   className="text-gray-600 hover:text-blue-800 transition duration-150 ease-in-out"
                 >
                   Cuisine
@@ -42,7 +42,7 @@ export default function Footer() {
               </li>
               <li className="mb-2">
                 <a
-                  href="achievement"
+                  href="/achievement#placard"
                   className="text-gray-600 hover:text-blue-800 transition duration-150 ease-in-out"
                 >
                   Dressing
