@@ -54,7 +54,102 @@ export default function ContactForm() {
   };
 
   const handleNext = () => {
-    setCurrentStep((prevStep) => prevStep + 1);
+    if (currentStep === 0) {
+      if (
+        !selectedProject1 ||
+        !selectedType ||
+        !selectedColors ||
+        !otherColors ||
+        !specialEquipment
+      ) {
+        alert("Veuillez remplir les formulaires .");
+      } else {
+        setCurrentStep(1);
+      }
+    }
+    if (currentStep === 1) {
+      if (selectedProject === "cuisine") {
+        if (!selectedType1) {
+          alert("veuillez remplir les formulaires");
+        } else {
+          setCurrentStep(2);
+        }
+      }
+      if (selectedProject === "placard") {
+        if (
+          !selectedPlace ||
+          !otherPlace ||
+          !selectedDoorType ||
+          !description
+        ) {
+          alert("veuillez remplir les formulaires");
+        } else {
+          setCurrentStep(2);
+        }
+      }
+      if (selectedProject === "armoire") {
+        if (
+          !plannedUsage ||
+          !dimension ||
+          !selectedStyle ||
+          !selectedDoorType ||
+          !specificNeeds
+        ) {
+          alert("veuillez remplir les formulaires");
+        } else {
+          setCurrentStep(2);
+        }
+      }
+      if (selectedProject === "dressing") {
+        if (
+          !installationType ||
+          !dimension ||
+          !selectedStyle ||
+          !specificNeeds
+        ) {
+          alert("veuillez remplir les formulaires");
+        } else {
+          setCurrentStep(2);
+        }
+      }
+      if (selectedProject === "douche") {
+        if (!furnitureType || !dimension || !selectedStyle || !specificNeeds) {
+          alert("veuillez remplir les formulaires");
+        } else {
+          setCurrentStep(2);
+        }
+      }
+    }
+    if (currentStep === 2) {
+      if (
+        !specificNeeds ||
+        !plannedUsage ||
+        !installationType ||
+        !furnitureType ||
+        !specificNeeds1 ||
+        !budget ||
+        !additionalRemarks
+      ) {
+        alert("Veuillez remplir les formulaires .");
+      } else {
+        setCurrentStep(3);
+      }
+    }
+    if (currentStep === 3) {
+      if (
+        !name ||
+        !firstName ||
+        !address ||
+        !email ||
+        !phone ||
+        !bestContactTime ||
+        !dateObject
+      ) {
+        alert("Veuillez remplir les formulaires .");
+      } else {
+        setCurrentStep(4);
+      }
+    }
   };
 
   const handlePrev = () => {

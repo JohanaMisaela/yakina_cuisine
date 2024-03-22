@@ -37,7 +37,7 @@ export default function Footer() {
                   href="/achievement#vasque"
                   className="text-gray-600 hover:text-blue-800 transition duration-150 ease-in-out"
                 >
-                  Meuble de cuisine
+                  Meuble de salle de bain
                 </a>
               </li>
               <li className="mb-2">

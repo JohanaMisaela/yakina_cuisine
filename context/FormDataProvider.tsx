@@ -38,6 +38,7 @@ interface FormData {
   phone: string;
   bestContactTime: string;
   dateObject: string;
+  curentStep: string;
 }
 
 interface FormDataContextProps {
@@ -83,6 +84,7 @@ export const FormDataProvider: React.FC<{ children: ReactNode }> = ({
     phone: "",
     bestContactTime: "",
     dateObject: "",
+    curentStep: "",
   });
 
   const updateFormData = (data: Partial<FormData>): void => {
