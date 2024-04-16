@@ -13,12 +13,10 @@ export default function Step4() {
     updateFormData({ [field]: value });
   };
   const [appointmentDateTime, setAppointmentDateTime] = useState();
-  const handledatetime = (value: any) => {
-    setAppointmentDateTime(value);
-    const dateObject = appointmentDateTime;
+  const handledatetime = async (value: any) => {
+    const dateObject = await value.$d;
     console.log(dateObject);
-
-    // handleInputChange("dateObject", appointmentDateTime);
+    handleInputChange("dateObject", dateObject);
   };
 
   return (

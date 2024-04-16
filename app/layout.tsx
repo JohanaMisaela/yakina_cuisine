@@ -30,18 +30,7 @@ export default function RootLayout({
       >
         <div className="flex flex-col min-h-screen overflow-hidden supports-[overflow:clip]:overflow-clip">
           <Header />
-          <ToastContainer
-            position="top-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-          />
+          <ToastContainer />
           {children}
           {/* <CookiesBanner /> */}
 

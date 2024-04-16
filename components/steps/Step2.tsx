@@ -179,7 +179,7 @@ const Step2: React.FC<Step2Props> = ({ selectedProject }) => {
                   handleInputChange("description", value);
                 }}
                 value={formData.description}
-                style={{ width: "100%", height: "10vh" }}
+                style={{ width: "100%", height: "10vh", color: "black" }}
               />
             </div>
           </>
