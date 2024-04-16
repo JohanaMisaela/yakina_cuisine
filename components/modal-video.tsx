@@ -12,23 +12,13 @@ export default function ModalVideo() {
           data-aos-delay="450"
         >
           <div className="w-full flex flex-col justify-center">
-            <div className="w-full h-auto lg:h-[90vh] ">
-              {/* <iframe
-                height="100%"
-                width="100%"
-                src="https://embed.wave.video/cTnqPbsoeqId0k5v?autoplay=1&loop=1"
-                allow="autoplay; fullscreen"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              ></iframe> */}
+            <div className="w-full h-[60vh] lg:h-[80vh] z-30">
               <iframe
-                width="100%"
                 height="100%"
-                src="https://www.youtube-nocookie.com/embed/bBPCcntxPZE?si=dgBpAopOGYQ42Izf"
-                title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
+                width="100%"
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                src="https://www.youtube.com/embed/bBPCcntxPZE?si=RLZsDnFUHjLR4fwm&amp;controls=0&mute=1&autoplay=1&loop=1&rel=0&playlist=bBPCcntxPZE"
+                title="YouTube video player"
               ></iframe>
             </div>
             <svg
@@ -77,7 +67,7 @@ export default function ModalVideo() {
               </defs>
             </svg>
           </div>
-          <button className="absolute top-full flex items-center transform -translate-y-1/2 bg-blue-900 rounded-full font-medium group p-4 shadow-lg">
+          <button className="z-40 absolute top-full flex items-center transform -translate-y-1/2 bg-blue-900 rounded-full font-medium group p-4 shadow-lg">
             <a href="/achievement">
               <span className="mx-3 text-white">Découvrir nos cuisines</span>
             </a>
